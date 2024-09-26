@@ -2,7 +2,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "serve": "bun --env-file=.env.local --watch src/main.ts --minify",
+    "serve": "concurrently \" bun --env-file=.env.local --watch src/main.ts --minify\" \" bun run css:watch \"",
     "build": "bun build src/main.ts --outdir ./dist --minify --splitting --target node ",
     "prestart": "bun run build",
     "start": "bun ./dist/main.js",
@@ -14,11 +14,14 @@
     "test:watch": "bun test --watch",
     "test:coverage": "bun test --coverage",
     "prepare": "husky",
-    "commit": "cz"
+    "commit": "cz",
+    "css:watch": "tailwindcss -i ./public/styles/input.css -o ./public/styles/style.css --watch",
+    "css:build": "tailwindcss -i ./public/styles/input.css -o ./public/styles/style.css"
   },
   "dependencies": {
     "@sequelize/core": "^7.0.0-alpha.37",
     "@types/swagger-ui-express": "^4.1.6",
+    "concurrently": "^9.0.1",
     "ejs": "^3.1.10",
     "express": "^4.21.0",
     "express-ejs-layouts": "^2.5.1",
@@ -37,8 +40,11 @@
     "@types/express-ejs-layouts": "^2.5.4",
     "@types/morgan": "^1.9.9",
     "@types/node": "^22.7.2",
+    "autoprefixer": "^10.4.20",
     "cz-conventional-changelog": "^3.3.0",
     "husky": "^9.1.6",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.13",
     "typescript": "^5.6.2"
   },
   "config": {
