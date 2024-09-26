@@ -20,4 +20,5 @@ export const CONFIGS = Object.freeze({
     PASSWORD: process.env.MYSQL_PASS,
     NAME: process.env.DB_NAME,
   },
+  FAVICON: path.join(process.cwd(), 'public', 'favicon.icon'),
 });

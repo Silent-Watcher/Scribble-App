@@ -5,6 +5,7 @@ import logger, { startLogger } from '$configs/logger.config';
 import { configureErrorHandler } from '$middlewares/errorHandler.middleware';
 import express from 'express';
 
+import { configSwaggerV1 } from './api/v1/swagger.config';
 import { sequelize } from './configs/db.config';
 
 import type { Application } from 'express';
@@ -15,6 +16,7 @@ const { PORT, DEBUG } = CONFIGS;
 configureApplication(app);
 startLogger(app);
 startRouter(app);
+configSwaggerV1(app);
 
 sequelize.authenticate().then(async () => {
   await sequelize.sync({ ...(DEBUG ? { force: true } : { alter: true }) });

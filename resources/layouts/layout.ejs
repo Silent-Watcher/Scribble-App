@@ -3,14 +3,55 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Note app</title>
-	<link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
-	<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-code-font@v1.1.2/dist/font-face.css" rel="stylesheet" type="text/css" />
+	<title>Scribble</title>
 	<link rel="stylesheet" href="/static/styles/style.css">
+	<link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
 	<%- style %>
 </head>
-<body>
-	<%- body %>
+<body class="container">
+
+		<!-- navbar start -->
+		<nav class="bg-white border-gray-200 dark:bg-gray-900 mt-20">
+			<div class="flex flex-wrap justify-center md:justify-between items-center mx-auto max-w-screen-xl p-4 ">
+				<a href="/" class="flex items-center space-x-3 rtl:space-x-reverse mb-5 lg:mb-0">
+					<img src="/static/imgs/inkwell.png" class="h-20" alt="logo" />
+				</a>
+
+				<div class="flex items-center space-x-6 rtl:space-x-reverse justify-center">
+					<a href="/auth/register" class="inline-block text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center  mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">Register</a>
+					<a href="/auth/login" class="inline-block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Login</a>
+				</div>
+			</div>
+			<div>
+				<ul class="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-xl justify-center">
+					<li>
+						<a href="/api/v1/docs" class="text-gray-900 dark:text-white hover:underline">API</a>
+					</li>
+					<li>
+						<a href="/about" class="text-gray-900 dark:text-white hover:underline">About</a>
+					</li>
+					<li>
+						<a href="/" class="text-gray-900 dark:text-white hover:underline">Home</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		<!-- navbar end -->
+
+		<!-- main start -->
+		<main class="text-center mt-32 lg:w-1/2 lg:mx-auto">
+			<%- body %>
+		</main>
+		<!-- main end -->
+
+		<!-- avatars start -->
+		<section class="flex justify-between items-center w-full absolute bottom-0 left-0 right-0">
+			<img class="h-96 hidden xl:block" loading="lazy" src="/static/imgs/human-1.svg" alt="avatar 1">
+			<img class="h-96 hidden xl:block" loading="lazy" src="/static/imgs/human-2.svg" alt="avatar 2">
+		</section>
+	   <!-- avatars end -->
+
+
 	<script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
 	<%- script %>
 </body>
