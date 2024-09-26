@@ -2,7 +2,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "serve": "concurrently \" bun --env-file=.env.local --watch src/main.ts --minify\" \" bun run css:watch \"",
+    "serve": "bun --env-file=.env.local --watch src/main.ts --minify",
     "build": "bun build src/main.ts --outdir ./dist --minify --splitting --target node ",
     "prestart": "bun run build",
     "start": "bun ./dist/main.js",

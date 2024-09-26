@@ -10,17 +10,16 @@ import { sequelize } from './configs/db.config';
 import type { Application } from 'express';
 const app: Application = express();
 
-const { PORT , DEBUG } = CONFIGS;
+const { PORT, DEBUG } = CONFIGS;
 
 configureApplication(app);
 startLogger(app);
 startRouter(app);
 
-
-sequelize.authenticate().then(async ()=>{
-	await sequelize.sync({...(DEBUG ? {force:true} : {alter:true} )})
-	logger.info(' MYSQL Connection has been established successfully!')
-	startServer(app, PORT);
-})
+sequelize.authenticate().then(async () => {
+  await sequelize.sync({ ...(DEBUG ? { force: true } : { alter: true }) });
+  logger.info(' MYSQL Connection has been established successfully!');
+  startServer(app, PORT);
+});
 
 configureErrorHandler(app);
