@@ -1,4 +1,4 @@
-import { Sequelize } from '@sequelize/core';
+import { Sequelize } from 'sequelize';
 
 import { CONFIGS } from './';
 import logger from './logger.config';

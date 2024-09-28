@@ -15,7 +15,7 @@ export const CONFIGS = Object.freeze({
   DB: {
     DIALECT: 'mysql',
     HOST: process.env.MYSQL_HOST,
-    PORT: process.env.MYSQL_PORT,
+    PORT: parseInt(process.env.MYSQL_PORT),
     USER: process.env.MYSQL_USER,
     PASSWORD: process.env.MYSQL_PASS,
     NAME: process.env.DB_NAME,

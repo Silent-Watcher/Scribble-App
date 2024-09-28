@@ -19,7 +19,6 @@
     "css:build": "tailwindcss -i ./public/styles/input.css -o ./public/styles/style.css"
   },
   "dependencies": {
-    "@sequelize/core": "^7.0.0-alpha.37",
     "@types/swagger-ui-express": "^4.1.6",
     "concurrently": "^9.0.1",
     "ejs": "^3.1.10",
@@ -28,6 +27,7 @@
     "http-status": "^1.7.4",
     "morgan": "^1.10.0",
     "mysql2": "^3.11.3",
+    "sequelize": "^6.37.3",
     "serve-favicon": "^2.5.0",
     "swagger-themes": "^1.4.3",
     "swagger-ui-express": "^5.0.1",

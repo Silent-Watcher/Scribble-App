@@ -1,6 +1,5 @@
-import { sequelize } from '$app/configs/db.config';
-
-import { DataTypes } from '@sequelize/core';
+import { sequelize } from '$configs/db.config';
+import { DataTypes } from 'sequelize';
 
 export const userModel = sequelize.define('user', {
   displayName: {
