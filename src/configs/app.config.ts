@@ -6,7 +6,10 @@ import logger from './logger.config';
 import { configureResources } from './resources.config';
 
 export function configureApplication(app: Application) {
-  app.use(express.json(), express.urlencoded({ extended: true }));
+  app.use(
+    express.json({ type: '*/*' }),
+    express.urlencoded({ extended: true }),
+  );
   configureResources(app);
 }
 

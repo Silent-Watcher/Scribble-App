@@ -20,7 +20,7 @@ function handleExceptions(
           status: res.statusCode,
           error: {
             code: error.code || 'INTERNAL SERVER ERROR',
-            ...(DEBUG ? err : { message: 'an error occurred' }),
+            ...(DEBUG ? error : { message: 'an error occurred' }),
           },
         });
       return;

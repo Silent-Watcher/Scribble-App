@@ -43,7 +43,7 @@
       },
       "userInput": {
         "type": "object",
-        "required": ["email","password","confirmPassword"],
+        "required": ["email", "password", "confirmPassword"],
         "properties": {
           "email": {
             "type": "string",

@@ -1,21 +1,29 @@
-import { removeEmptyValues } from '$app/common/middlewares/omitEmpty.middleware';
 import { validateBody } from '$app/common/validation/dataValidator';
-import { zUser } from '$app/common/validation/schema/user.schema';
+import {
+  zLoginDto,
+  zRegisterDto,
+} from '$app/common/validation/schema/auth.schema';
+import { removeEmptyValues } from '$middlewares/omitEmpty.middleware';
 import { Router } from 'express';
 
-import {
-  getLoginPage,
-  getRegisterPage,
-  login,
-  register,
-} from './auth.controller';
+import authController from './auth.controller';
 
 const router = Router();
 
-router.get('/register', getRegisterPage);
-router.post('/register', removeEmptyValues(), validateBody(zUser), register);
+router.get('/register', authController.getRegisterPage);
+router.post(
+  '/register',
+  removeEmptyValues(),
+  validateBody(zRegisterDto),
+  authController.register,
+);
 
-router.get('/login', getLoginPage);
-router.post('/login', removeEmptyValues(), validateBody(zUser), login);
+router.get('/login', authController.getLoginPage);
+router.post(
+  '/login',
+  removeEmptyValues(),
+  validateBody(zLoginDto),
+  authController.login,
+);
 
 export default router;

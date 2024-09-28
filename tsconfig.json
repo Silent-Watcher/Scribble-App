@@ -39,6 +39,8 @@
       "$middlewares/*": ["./src/common/middlewares/*"],
       "$utils/*": ["./src/common/utils/*"],
       "$configs/*": ["./src/configs/*"],
+      "$validation/*": ["./src/common/validation/*"],
+      "$interfaces/*": ["./src/common/interfaces/*"],
       "$api/*": ["./src/api/*"]
     },
 

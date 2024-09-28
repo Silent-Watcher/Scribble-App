@@ -3,12 +3,15 @@ import { z } from 'zod';
 export const zUser = z
   .object({
     displayName: z.string().trim().optional(),
-    email: z.string().email('invalid email format!'),
+    email: z.string().trim().email('invalid email format!'),
     isEmailVerified: z.boolean().default(false),
-    password: z.string().min(8, 'password should be at least 8 characters'),
-    confirmPassword: z.string().min(8),
+    password: z
+      .string()
+      .trim()
+      .min(8, 'password should be at least 8 characters'),
+    createdAt: z.date(),
+    updatedAt: z.date(),
   })
-  .refine(({ password, confirmPassword }) => password == confirmPassword, {
-    message: 'The passwords did not match',
-    path: ['confirmPassword'],
-  });
+  .strict();
+
+export type User = z.infer<typeof zUser>;

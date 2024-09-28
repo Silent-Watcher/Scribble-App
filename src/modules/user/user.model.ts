@@ -10,6 +10,9 @@ export const userModel = sequelize.define('user', {
     type: DataTypes.STRING(100),
     unique: true,
     allowNull: false,
+    validate: {
+      isEmail: true,
+    },
   },
   isEmailVerified: {
     type: DataTypes.BOOLEAN(),
