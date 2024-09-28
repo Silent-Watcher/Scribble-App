@@ -11,6 +11,19 @@
   },
   "components": {
     "schemas": {
+      "user": {
+        "type": "object",
+        "properties": {
+          "displayName": {
+            "type": "string",
+            "example": "Ali nazari"
+          },
+          "email": {
+            "type": "string",
+            "example": "backendwithali@gmail.com"
+          }
+        }
+      },
       "successResponse": {
         "type": "object",
         "properties": {
@@ -27,6 +40,44 @@
             "example": "server is up and running ..."
           }
         }
+      },
+      "userInput": {
+        "type": "object",
+        "required": ["email","password","confirmPassword"],
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "backendwithali@gmail.com"
+          },
+          "password": {
+            "type": "number",
+            "example": "should be at least 8 chars"
+          },
+          "confirmPassword": {
+            "type": "string",
+            "example": "should be at least 8 chars"
+          }
+        }
+      },
+      "registeredSuccessfully": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "number",
+            "example": 200
+          },
+          "code": {
+            "type": "string",
+            "example": "OK"
+          },
+          "message": {
+            "type": "string",
+            "example": "user registered successfully"
+          },
+          "user": {
+            "$ref": "#/components/schemas/user"
+          }
+        }
       }
     }
   },
@@ -37,10 +88,43 @@
         "tags": ["Server"],
         "responses": {
           "200": {
+            "description": "returns 200 status code when the server is running correctly",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/successResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "summary": "register a new user",
+        "tags": ["Authentication"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/userInput"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/userInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/registeredSuccessfully"
                 }
               }
             }
