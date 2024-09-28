@@ -1,10 +1,11 @@
 import { Controller } from '$interfaces/Controller';
 import { userModel } from '$modules/user/user.model';
-import { hashPassword } from '$utils/password.util';
+import { hashPassword, verifyPassword } from '$utils/password.util';
 
-import type { RegisterDto } from '$validation/schema/auth.schema';
+import { authMessages } from './auth.messages';
+
+import type { LoginDto, RegisterDto } from '$validation/schema/auth.schema';
 import type { User } from '$validation/schema/user.schema';
-
 class AuthService extends Controller {
   constructor() {
     super();
@@ -12,14 +13,44 @@ class AuthService extends Controller {
 
   async register(dto: RegisterDto): Promise<User> {
     dto.password = await hashPassword(dto.password);
+
+	// send email verification code !
+	// if the code was correct create the user and then update the status!
+
     const newUser = await userModel.create(dto);
     return newUser.toJSON() as User;
   }
 
+  async login(dto: LoginDto) {
+    const foundedUser = await this.isEmailAlreadyExists(dto.email);
+    if (!foundedUser) {
+      throw {
+        status: 400,
+		code : 'BAD REQUEST',
+		message: authMessages.invalidCredentials,
+      };
+    }
 
-  async isEmailAlreadyExists(email :string){
-	const foundedUser = await userModel.findOne({where:{email}})
-	return foundedUser === null ? false : true;
+    const isPasswordValid = await this.checkIfThePasswordIsCorrect(
+      dto.password,
+      (foundedUser as unknown as User).password,
+    );
+    if (!isPasswordValid) {
+      throw {
+        status: 400,
+     	message: authMessages.invalidCredentials
+      };
+    }
+
+  }
+
+  async isEmailAlreadyExists(email: string) {
+    const foundedUser = await userModel.findOne({ where: { email } });
+    return foundedUser === null ? false : foundedUser;
+  }
+
+  async checkIfThePasswordIsCorrect(password: string, hash: string) {
+    return await verifyPassword(hash, password);
   }
 }
 

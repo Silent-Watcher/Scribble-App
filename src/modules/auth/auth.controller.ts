@@ -1,4 +1,4 @@
-import type { RegisterDto } from '$validation/schema/auth.schema';
+import type { LoginDto, RegisterDto } from '$validation/schema/auth.schema';
 import type { Request, Response, NextFunction } from 'express';
 import { Controller } from '$interfaces/Controller';
 import httpStatus from 'http-status';
@@ -34,19 +34,21 @@ class AuthController extends Controller {
     try {
       const dto = req.body as RegisterDto;
 
-	  // check for duplicate email value
-	  const isEmailValueDuplicated = await this.service.isEmailAlreadyExists(dto.email);
+      // check for duplicate email value
+      const isEmailValueDuplicated = await this.service.isEmailAlreadyExists(
+        dto.email,
+      );
 
-	  if(isEmailValueDuplicated){
-		  res.status(httpStatus.CONFLICT).send({
-			  status: res.statusCode,
-			  error:{
-				  code : "CONFLICT",
-				  message: 'this email is already exists'
-			  }
-		  })
-		  return;
-	  }
+      if (isEmailValueDuplicated) {
+        res.status(httpStatus.CONFLICT).send({
+          status: res.statusCode,
+          error: {
+            code: 'CONFLICT',
+            message: authMessages.duplicateEmailValue,
+          },
+        });
+        return;
+      }
 
       const { email, displayName } = await this.service.register(dto);
 
@@ -66,9 +68,18 @@ class AuthController extends Controller {
     }
   }
 
-  async login(_req: Request, _res: Response, next: NextFunction) {
+  async login(req: Request, res: Response, next: NextFunction) {
     try {
-      console.log('logging');
+      const dto = req.body as LoginDto;
+
+      await this.service.login(dto);
+
+	   res.status(httpStatus.OK).send({
+		status: res.statusCode,
+		code : 'OK',
+		message: authMessages.loginSuccessfully
+	  })
+	  return;
     } catch (error) {
       next(error);
     }
