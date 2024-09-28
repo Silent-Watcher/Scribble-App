@@ -19,7 +19,7 @@ startRouter(app);
 configSwaggerV1(app);
 
 sequelize.authenticate().then(async () => {
-  await sequelize.sync({ ...(DEBUG ? { force: true } : { alter: true }) });
+  if (DEBUG) await sequelize.sync({ force: true });
   logger.info(' MYSQL Connection has been established successfully!');
   startServer(app, PORT);
 });

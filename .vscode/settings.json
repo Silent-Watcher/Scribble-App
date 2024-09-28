@@ -8,7 +8,7 @@
     "**/Thumbs.db": true,
     "**/node_modules": true
   },
-  "cSpell.words": ["bunx", "outdir", "prestart", "virtuals"],
+  "cSpell.words": ["bunx", "openapi", "outdir", "prestart", "virtuals"],
   "files.watcherExclude": {
     "**/.git/objects/**": true,
     "**/.git/subtree-cache/**": true

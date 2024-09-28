@@ -1,1 +1,29 @@
-{}
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Scribble",
+    "description": "Scribble API for designing not taking apps",
+    "version": "1.0.0",
+    "contact": {
+      "email": "backendwithali@gmail.com",
+      "name": "Ali nazari"
+    }
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "check if the server is ruining",
+        "tags": ["Server"],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
