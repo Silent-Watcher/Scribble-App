@@ -9,6 +9,27 @@
       "name": "Ali nazari"
     }
   },
+  "components": {
+    "schemas": {
+      "successResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "number",
+            "example": 200
+          },
+          "code": {
+            "type": "string",
+            "example": "OK"
+          },
+          "message": {
+            "type": "string",
+            "example": "server is up and running ..."
+          }
+        }
+      }
+    }
+  },
   "paths": {
     "/health": {
       "get": {
@@ -18,7 +39,9 @@
           "200": {
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/successResponse"
+                }
               }
             }
           }
