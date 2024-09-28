@@ -6,12 +6,12 @@ import type { Request, Response, NextFunction, Application } from 'express';
 const { DEBUG } = CONFIGS;
 
 type HttpError = {
-	status : number;
-	error: {
-		code : string;
-		message: string
-	}
-}
+  status: number;
+  error: {
+    code: string;
+    message: string;
+  };
+};
 
 function handleExceptions(
   err: unknown,
@@ -33,13 +33,15 @@ function handleExceptions(
         });
       return;
     }
-    res.status((err as HttpError).status || httpStatus.INTERNAL_SERVER_ERROR).send({
-      status: res.statusCode,
-      error: {
-        code: (err as HttpError)?.error?.code ||'INTERNAL SERVER ERROR',
-        ...(DEBUG ? err : {}),
-      },
-    });
+    res
+      .status((err as HttpError).status || httpStatus.INTERNAL_SERVER_ERROR)
+      .send({
+        status: res.statusCode,
+        error: {
+          code: (err as HttpError)?.error?.code || 'INTERNAL SERVER ERROR',
+          ...(DEBUG ? err : {}),
+        },
+      });
     return;
   } else {
     next();

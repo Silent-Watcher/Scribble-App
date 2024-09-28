@@ -74,12 +74,12 @@ class AuthController extends Controller {
 
       await this.service.login(dto);
 
-	   res.status(httpStatus.OK).send({
-		status: res.statusCode,
-		code : 'OK',
-		message: authMessages.loginSuccessfully
-	  })
-	  return;
+      res.status(httpStatus.OK).send({
+        status: res.statusCode,
+        code: 'OK',
+        message: authMessages.loginSuccessfully,
+      });
+      return;
     } catch (error) {
       next(error);
     }

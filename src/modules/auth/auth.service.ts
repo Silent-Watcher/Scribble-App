@@ -14,8 +14,8 @@ class AuthService extends Controller {
   async register(dto: RegisterDto): Promise<User> {
     dto.password = await hashPassword(dto.password);
 
-	// send email verification code !
-	// if the code was correct create the user and then update the status!
+    // send email verification code !
+    // if the code was correct create the user and then update the status!
 
     const newUser = await userModel.create(dto);
     return newUser.toJSON() as User;
@@ -26,8 +26,8 @@ class AuthService extends Controller {
     if (!foundedUser) {
       throw {
         status: 400,
-		code : 'BAD REQUEST',
-		message: authMessages.invalidCredentials,
+        code: 'BAD REQUEST',
+        message: authMessages.invalidCredentials,
       };
     }
 
@@ -38,10 +38,9 @@ class AuthService extends Controller {
     if (!isPasswordValid) {
       throw {
         status: 400,
-     	message: authMessages.invalidCredentials
+        message: authMessages.invalidCredentials,
       };
     }
-
   }
 
   async isEmailAlreadyExists(email: string) {
