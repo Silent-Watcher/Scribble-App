@@ -4,7 +4,7 @@ import { fromZodError } from 'zod-validation-error';
 import logger from './logger.config';
 
 const environmentSchema = z.object({
-  PORT: z.string(),
+  APP_PORT: z.string(),
 
   NODE_ENV: z.enum(['development', 'production']),
   APP_ENV: z.enum(['development', 'production']),
@@ -13,6 +13,9 @@ const environmentSchema = z.object({
   MYSQL_USER: z.string(),
   MYSQL_PASS: z.string(),
   MYSQL_PORT: z.string(),
+
+  APP_NAME: z.literal('Scribble'),
+  APP_URL: z.string().trim().url(),
 
   DB_NAME: z.string(),
   DB_URL: z.string(),

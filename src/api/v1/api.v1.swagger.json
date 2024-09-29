@@ -41,7 +41,7 @@
           }
         }
       },
-      "userInput": {
+      "registerUserInput": {
         "type": "object",
         "required": ["email", "password", "confirmPassword"],
         "properties": {
@@ -55,6 +55,20 @@
           },
           "confirmPassword": {
             "type": "string",
+            "example": "should be at least 8 chars"
+          }
+        }
+      },
+      "loginUserInput": {
+        "type": "object",
+        "required": ["email", "password"],
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "backendwithali@gmail.com"
+          },
+          "password": {
+            "type": "number",
             "example": "should be at least 8 chars"
           }
         }
@@ -76,6 +90,23 @@
           },
           "user": {
             "$ref": "#/components/schemas/user"
+          }
+        }
+      },
+      "loggedInSuccessfully": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "number",
+            "example": 200
+          },
+          "code": {
+            "type": "string",
+            "example": "OK"
+          },
+          "message": {
+            "type": "string",
+            "example": "loggedIn successfully"
           }
         }
       }
@@ -109,12 +140,12 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/userInput"
+                "$ref": "#/components/schemas/registerUserInput"
               }
             },
             "application/x-www-form-urlencoded": {
               "schema": {
-                "$ref": "#/components/schemas/userInput"
+                "$ref": "#/components/schemas/registerUserInput"
               }
             }
           }
@@ -125,6 +156,38 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/registeredSuccessfully"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "summary": "login an existing user",
+        "tags": ["Authentication"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/loginUserInput"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/loginUserInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loggedInSuccessfully"
                 }
               }
             }

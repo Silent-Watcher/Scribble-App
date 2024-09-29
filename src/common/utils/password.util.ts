@@ -1,9 +1,5 @@
-import bcrypt from 'bcrypt';
-
 export async function hashPassword(password: string): Promise<string> {
-  const saltRounds = 10;
-  const salt = await bcrypt.genSalt(saltRounds);
-  const hash = await bcrypt.hash(password, salt);
+  const hash = await Bun.password.hash(password);
   return hash;
 }
 
@@ -11,5 +7,5 @@ export async function verifyPassword(
   hash: string,
   password: string,
 ): Promise<boolean> {
-  return await bcrypt.compare(password, hash);
+  return await Bun.password.verify(password, hash);
 }

@@ -45,7 +45,7 @@
     },
 
     "typeRoots": ["./src/common/@types/**", "./node_modules/@types/"],
-    "types": ["node"]
+    "types": ["node", "bun"]
   },
   "include": ["./src/**/*"],
   "exclude": ["./node_modules/"]

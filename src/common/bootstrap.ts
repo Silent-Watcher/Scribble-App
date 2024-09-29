@@ -1,17 +1,16 @@
+import { configSwaggerV1 } from '$api/v1/swagger.config';
 import { startRouter } from '$app/common/router';
 import { CONFIGS } from '$app/configs';
 import { configureApplication, startServer } from '$configs/app.config';
+import { sequelize } from '$configs/db.config';
 import logger, { startLogger } from '$configs/logger.config';
 import { configureErrorHandler } from '$middlewares/errorHandler.middleware';
 import express from 'express';
 
-import { configSwaggerV1 } from './api/v1/swagger.config';
-import { sequelize } from './configs/db.config';
-
 import type { Application } from 'express';
 const app: Application = express();
 
-const { PORT } = CONFIGS;
+const { PORT } = CONFIGS.APP;
 
 configureApplication(app);
 startLogger(app);

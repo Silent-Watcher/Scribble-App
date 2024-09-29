@@ -1,7 +1,8 @@
+import { hashPassword, verifyPassword } from '$app/common/utils/password.util';
 import { Controller } from '$interfaces/Controller';
 import { userModel } from '$modules/user/user.model';
-import { hashPassword, verifyPassword } from '$utils/password.util';
 
+// import { hashPassword, verifyPassword } from '$utils/password.util';
 import { authMessages } from './auth.messages';
 
 import type { LoginDto, RegisterDto } from '$validation/schema/auth.schema';
@@ -15,6 +16,7 @@ class AuthService extends Controller {
     dto.password = await hashPassword(dto.password);
 
     // send email verification code !
+
     // if the code was correct create the user and then update the status!
 
     const newUser = await userModel.create(dto);
