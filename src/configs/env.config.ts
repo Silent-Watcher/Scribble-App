@@ -23,7 +23,7 @@ const environmentSchema = z.object({
   RECAPTCHA_SITE_KEY: z.string(),
   RECAPTCHA_SECRET_KEY: z.string(),
 
-  SESSION_SECRET: z.string()
+  SESSION_SECRET: z.string(),
 });
 
 const envParsedResult = environmentSchema.safeParse(process.env);

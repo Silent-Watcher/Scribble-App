@@ -34,35 +34,35 @@ class AuthController extends Controller {
     try {
       const dto = req.body as RegisterDto;
 
-        // check for duplicate email value
-        const isEmailValueDuplicated = await this.service.isEmailAlreadyExists(
-          dto.email,
-        );
+      // check for duplicate email value
+      const isEmailValueDuplicated = await this.service.isEmailAlreadyExists(
+        dto.email,
+      );
 
-        if (isEmailValueDuplicated) {
-          res.status(httpStatus.CONFLICT).send({
-            status: res.statusCode,
-            error: {
-              code: 'CONFLICT',
-              message: authMessages.duplicateEmailValue,
-            },
-          });
-          return;
-        }
-
-        const { email, displayName } = await this.service.register(dto);
-
-        res.status(httpStatus.OK).send({
+      if (isEmailValueDuplicated) {
+        res.status(httpStatus.CONFLICT).send({
           status: res.statusCode,
-          code: 'OK',
-          message: authMessages.registeredSuccessfully,
-          user: {
-            ...(displayName
-              ? { displayName: displayName, email: email }
-              : { email: email }),
+          error: {
+            code: 'CONFLICT',
+            message: authMessages.duplicateEmailValue,
           },
         });
         return;
+      }
+
+      const { email, displayName } = await this.service.register(dto);
+
+      res.status(httpStatus.OK).send({
+        status: res.statusCode,
+        code: 'OK',
+        message: authMessages.registeredSuccessfully,
+        user: {
+          ...(displayName
+            ? { displayName: displayName, email: email }
+            : { email: email }),
+        },
+      });
+      return;
     } catch (error) {
       next(error);
     }
@@ -85,16 +85,13 @@ class AuthController extends Controller {
     }
   }
 
+  //   async verifyEmail(req: Request, res: Response, next: NextFunction){
+  // 	try {
 
-
-//   async verifyEmail(req: Request, res: Response, next: NextFunction){
-// 	try {
-
-// 	} catch (error) {
-// 		next(error);
-// 	}
-//   }
-
+  // 	} catch (error) {
+  // 		next(error);
+  // 	}
+  //   }
 }
 
 export default new AuthController();

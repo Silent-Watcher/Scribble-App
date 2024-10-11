@@ -11,14 +11,11 @@ import { sequelize } from './db.config';
 import logger from './logger.config';
 import { configureResources } from './resources.config';
 
-const sequelizeStore = SequelizeStore(session.Store)
+const sequelizeStore = SequelizeStore(session.Store);
 
 export function configureApplication(app: Application) {
   // basic middlewares
-  app.use(
-    express.json(),
-    express.urlencoded({ extended: true }),
-  );
+  app.use(express.json(), express.urlencoded({ extended: true }));
   // !! setup helmet
   // api call rate limitation
   app.use(
@@ -28,21 +25,23 @@ export function configureApplication(app: Application) {
     }),
   );
 
-  app.use(session({
-	  secret : CONFIGS.SESSION.SECRET,
-	  resave: false,
-	  saveUninitialized: false,
-	  store:  new sequelizeStore({
-		db: sequelize,
-	  }),
-	  cookie : {
-		domain: '/',
-		maxAge : CONFIGS.TIME._24h.ms,
-		httpOnly: true,
-		secure : !CONFIGS.DEBUG,
-		sameSite: 'strict'
-	  }
-  }))
+  app.use(
+    session({
+      secret: CONFIGS.SESSION.SECRET,
+      resave: false,
+      saveUninitialized: false,
+      store: new sequelizeStore({
+        db: sequelize,
+      }),
+      cookie: {
+        domain: '/',
+        maxAge: CONFIGS.TIME._24h.ms,
+        httpOnly: true,
+        secure: !CONFIGS.DEBUG,
+        sameSite: 'strict',
+      },
+    }),
+  );
 
   // response compression
   app.use(compression({}));

@@ -17,10 +17,13 @@ class AuthService extends Controller {
 
     // send email verification code !
 
-    const newUser = await userModel.create({
-		email : dto.email,
-		password: dto.password,
-	}, {fields: ['email' , 'password']});
+    const newUser = await userModel.create(
+      {
+        email: dto.email,
+        password: dto.password,
+      },
+      { fields: ['email', 'password'] },
+    );
 
     return newUser.toJSON() as User;
   }

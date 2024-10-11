@@ -20,9 +20,9 @@ window.addEventListener('load', () => {
     })
       .then((response) => response.json())
       .then((response) => {
-		if(response.status == 200){
-			location.href = '/auth/verify-email'
-		}
+        if (response.status == 200) {
+          location.href = '/auth/verify-email';
+        }
       });
   });
 

@@ -33,12 +33,12 @@ export const CONFIGS = Object.freeze({
       SITE_KEY: env.RECAPTCHA_SITE_KEY,
     },
   },
-  SESSION:{
-	SECRET: env.SESSION_SECRET
+  SESSION: {
+    SECRET: env.SESSION_SECRET,
   },
   TIME: {
-	_24h: {
-		ms : 24 * 60 * 60 * 10000
-	}
-  }
+    _24h: {
+      ms: 24 * 60 * 60 * 10000,
+    },
+  },
 });

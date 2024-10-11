@@ -1,6 +1,9 @@
 import { validateBody } from '$app/common/validation/data.validator';
 import { validateRecaptchaV3 } from '$app/common/validation/recaptcha.validator';
-import { zLoginDto, zRegisterDto } from '$app/common/validation/schema/auth.schema';
+import {
+  zLoginDto,
+  zRegisterDto,
+} from '$app/common/validation/schema/auth.schema';
 import { removeEmptyValues } from '$middlewares/omitEmpty.middleware';
 import { Router } from 'express';
 
@@ -26,6 +29,5 @@ router.post(
 );
 
 // router.get('/verify-email', authController.verifyEmail)
-
 
 export default router;
