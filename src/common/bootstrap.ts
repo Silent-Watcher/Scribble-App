@@ -17,14 +17,16 @@ startLogger(app);
 startRouter(app);
 configSwaggerV1(app);
 
-sequelize.authenticate().then(async () => {
-  // if (DEBUG) await sequelize.sync({ force: true });
-  logger.info('MYSQL Connection has been established successfully!');
-  startServer(app, PORT);
-}).catch(err => {
-  logger.error('Unable to connect to the database:', err);
-  process.exit(1); // Exit the process with a failure code
-});
-
+sequelize
+  .authenticate()
+  .then(async () => {
+    if (CONFIGS.DEBUG) await sequelize.sync({ force: true });
+    logger.info('MYSQL Connection has been established successfully!');
+    startServer(app, PORT);
+  })
+  .catch((err) => {
+    logger.error('Unable to connect to the database:', err);
+    process.exit(1); // Exit the process with a failure code
+  });
 
 configureErrorHandler(app);

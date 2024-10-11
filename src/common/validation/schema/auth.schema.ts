@@ -9,7 +9,7 @@ export const zRegisterDto = z
       .min(8, 'password should be at least 8 characters'),
     confirmPassword: z.string().trim().min(8),
   })
-  .strict()
+//   .strict()
   .refine(({ password, confirmPassword }) => password == confirmPassword, {
     message: 'The passwords did not match',
     path: ['confirmPassword'],

@@ -19,6 +19,11 @@ const environmentSchema = z.object({
 
   DB_NAME: z.string(),
   DB_URL: z.string(),
+
+  RECAPTCHA_SITE_KEY: z.string(),
+  RECAPTCHA_SECRET_KEY: z.string(),
+
+  SESSION_SECRET: z.string()
 });
 
 const envParsedResult = environmentSchema.safeParse(process.env);

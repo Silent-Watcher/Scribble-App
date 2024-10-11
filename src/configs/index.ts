@@ -27,4 +27,18 @@ export const CONFIGS = Object.freeze({
     URL: env.APP_URL,
     LOGO: join(cwd(), 'public', 'imgs', 'inkwell.png'),
   },
+  RECAPTCHA: {
+    V3: {
+      SECRET_KEY: env.RECAPTCHA_SECRET_KEY,
+      SITE_KEY: env.RECAPTCHA_SITE_KEY,
+    },
+  },
+  SESSION:{
+	SECRET: env.SESSION_SECRET
+  },
+  TIME: {
+	_24h: {
+		ms : 24 * 60 * 60 * 10000
+	}
+  }
 });

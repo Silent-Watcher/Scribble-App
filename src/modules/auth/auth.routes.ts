@@ -1,8 +1,6 @@
-import { validateBody } from '$app/common/validation/dataValidator';
-import {
-  zLoginDto,
-  zRegisterDto,
-} from '$app/common/validation/schema/auth.schema';
+import { validateBody } from '$app/common/validation/data.validator';
+import { validateRecaptchaV3 } from '$app/common/validation/recaptcha.validator';
+import { zLoginDto, zRegisterDto } from '$app/common/validation/schema/auth.schema';
 import { removeEmptyValues } from '$middlewares/omitEmpty.middleware';
 import { Router } from 'express';
 
@@ -13,6 +11,7 @@ const router = Router();
 router.get('/register', authController.getRegisterPage);
 router.post(
   '/register',
+  validateRecaptchaV3('register'),
   removeEmptyValues(),
   validateBody(zRegisterDto),
   authController.register,
@@ -25,5 +24,8 @@ router.post(
   validateBody(zLoginDto),
   authController.login,
 );
+
+// router.get('/verify-email', authController.verifyEmail)
+
 
 export default router;

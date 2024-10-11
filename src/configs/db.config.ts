@@ -12,8 +12,5 @@ export const sequelize = new Sequelize({
   database: CONFIGS.DB.NAME,
   logging: (msg) => {
     logger.info(msg);
-  },
-  define: {
-    freezeTableName: true,
-  },
+  }
 });

@@ -17,9 +17,11 @@ class AuthService extends Controller {
 
     // send email verification code !
 
-    // if the code was correct create the user and then update the status!
+    const newUser = await userModel.create({
+		email : dto.email,
+		password: dto.password,
+	}, {fields: ['email' , 'password']});
 
-    const newUser = await userModel.create(dto);
     return newUser.toJSON() as User;
   }
 

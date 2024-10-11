@@ -10,11 +10,13 @@
   },
   "cSpell.words": [
     "bunx",
+    "grecaptcha",
     "mailgen",
     "openapi",
     "outdir",
     "outro",
     "prestart",
+    "resave",
     "virtuals"
   ],
   "files.watcherExclude": {
